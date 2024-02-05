@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ml2efp-pod
+  labels:
+    app: hhh
+spec:
+  containers:
+  - name: container
+    image: gitlab-registry.nrp-nautilus.io/jmduarte/hhh:latest
+    command: ["/bin/bash", "-c", "sleep infinity"]
+    resources:
+      limits:
+        nvidia.com/gpu: "1"
+    volumeMounts:
+    - mountPath: /ml2efp-vol
+      name: ml2efp-vol
+  volumes:
+    - name: ml2efp-vol
+      persistentVolumeClaim:
+        claimName: ml2efp-vol
